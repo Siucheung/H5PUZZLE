@@ -1,0 +1,87 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>拼图游戏</title>
+    <link href="css/style.css" rel="stylesheet" />
+    <link href="css/image-puzzle.css" rel="stylesheet" />
+    <script src="js/image-puzzle.js"></script>
+</head>
+
+<body>
+    <div id="collage">
+        <h2>拼图游戏</h2>
+        <hr />
+        <div id="playPanel" style="padding:5px;display:none;">
+            <h3 id="imgTitle"></h3>
+            <hr />
+            <div style="display:inline-block; margin:auto; width:95%; vertical-align:top;">
+                <ul id="sortable" class="sortable"></ul>
+                <div id="actualImageBox">
+                    <div id="stepBox">
+                        <div>步数:</div>
+                        <div id="stepCount" class="stepCount">0</div>
+                    </div>
+                    <div id="timeBox">
+                        花费的时间: <span id="timerPanel"></span> 秒
+                    </div>
+                    <img id="actualImage" />
+                    <div>请尝试拼好这张图片.</div>
+                    <p id="levelPanel">
+                        <input type="radio" name="level" id="easy" checked="checked" value="3"
+                            onchange="imagePuzzle.startGame(images, this.value);" /> <label for="easy">简单模式</label>
+                        <input type="radio" name="level" id="medium" value="4"
+                            onchange="imagePuzzle.startGame(images, this.value);" /> <label for="medium">中等模式</label>
+                        <input type="radio" name="level" id="hard" value="5"
+                            onchange="imagePuzzle.startGame(images, this.value);" /> <label for="hard">困难模式</label>
+                    </p>
+                    <div>
+                        <button id="btnRule" type="button" class="btn" onclick="rules();">规则</button>
+                        <button id="newPhoto" type="button" class="btn" onclick="restart();">换一张</button>
+                        <button id="btnReplay" type="button" class="btn" onclick="about();">关于</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="gameOver" style="display:none;">
+            <div style="background-color: #fc9e9e; padding: 5px 10px 20px 10px; text-align: center; ">
+                <h2 style="text-align:center">游戏结束!!</h2>
+                恭喜老婆!! <br /> 你已经完成了这幅图片.
+                <br /> 步数: <span id="stepCount" class="stepCount">0</span> 步.
+                <br /> 花费的时间: <span class="timeCount">0</span> 秒<br />
+                <div>
+                    <button type="button" onclick="window.location.reload(true);">重新开始</button>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var images = [
+                { src: 'images/a.jpg', title: '娇羞的你' },
+                { src: 'images/b.jpg', title: '成长的你' },
+                { src: 'images/c.jpg', title: '可爱的你' },
+                { src: 'images/d.jpg', title: '运动的你' },
+                { src: 'images/e.jpg', title: '安静的你' },
+                { src: 'images/f.jpg', title: '笨笨的你' },
+                { src: 'images/g.jpg', title: '梦中的你' }
+            ];
+
+            window.onload = function () {
+                var gridSize = document.querySelector('#levelPanel input[type="radio"]:checked').getAttribute('value');
+                imagePuzzle.startGame(images, gridSize);
+            };
+            function restart() {
+                var gridSize = document.querySelector('#levelPanel input[type="radio"]:checked').getAttribute('value');
+                imagePuzzle.startGame(images, gridSize);
+            }
+            function rules() {
+                alert('在一定步数和时间内完成图片噢~ \n图片完成后联系老公兑换积分~');
+            }
+            function about() {
+                alert('从童年起\n我便独自一人\n照顾着\n历代的星辰\n而往后余生\n我多了一轮明月');
+            }
+        </script>
+    </div>
+</body>
+
+</html>
